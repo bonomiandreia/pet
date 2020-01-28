@@ -8,7 +8,7 @@ router.get( '/', (require, response) => {
         return response.send(info)
     })
 })
-
+ 
 router.post( '/create', (require, response) => {
     const { email, password } = require.body;
 
