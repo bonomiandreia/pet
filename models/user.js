@@ -8,13 +8,12 @@ const UserSchema = new schema({
     created: { type: Date, default: Date.now }
 })
 
-UserSchema.pre('save', function(next){
+UserSchema.pre('save', async function(next){
     let user = this;
     if (!user.isModified('password')) return next();
-    crypt.hash(user.password, 10, (error, encrypted) => {
-        user.password = encrypted;
-        return next();
-    })
+
+    user.password = await crypt.hash(user.password, 10);
+    return next();
 
 })
 

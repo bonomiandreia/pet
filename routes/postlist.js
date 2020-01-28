@@ -2,23 +2,30 @@ const express = require('express');
 const router = express.Router();
 const posts = require('../models/post')
 
-router.post( '/', (require, response) => {
+router.post( '/', async (require, response) => {
     const { idUser } = require.body
-    posts.find({ idUser }, (error, info) => {
-        if (error) return info.send({error: 'error in info'+error})
-        return response.send(info)
-    })
+
+    try {
+        const post = await posts.find({ idUser })
+        return response.send(post)
+
+    } catch {
+        return info.send({error: 'error in info'+error})
+    }
 })
  
-router.post( '/create', (require, response) => {
+router.post( '/create', async (require, response) => {
     const { date, text, idUser } = require.body;
 
     if (!date || !text || !idUser) return response.send({message: 'error information'})
 
-    posts.create(require.body, (error, created) => {
-        if (error) return response.send( {message: 'error in create a post'})
-        return response.send(created)
-    }) 
+    try {
+        const postCreate = await posts.create(require.body)
+        return response.send(postCreate)
+
+    } catch {
+        return response.send( {message: 'error in create a post'})
+    }
 })
 
 module.exports = router;
