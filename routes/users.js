@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const auth = require('../MD/auth')
 
 const createdToken = (idUser) => {
-    return jwt.sign({ id: idUser }, 'teste123', {expiresIn: '7d'})
+    return jwt.sign({ id: idUser }, '*password*', {expiresIn: '7d'})
 }
 
 router.get( '/', auth, async (require, response) => {

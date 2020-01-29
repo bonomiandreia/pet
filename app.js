@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const bodyparser = require('body-parser')
 
-const url = 'mongodb+srv://admin-deia:maria12345@cluster0-pdbvx.mongodb.net/test?retryWrites=true&w=majority'
+const url = 'mongodb+srv://<admin>:<password>@cluster0-pdbvx.mongodb.net/test?retryWrites=true&w=majority'
 const options = {
     reconnectTries: Number.MAX_VALUE, reconnectInterval: 500, poolSize: 5, useNewUrlParser: true
 }
