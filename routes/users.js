@@ -3,12 +3,13 @@ const router = express.Router();
 const users = require('../models/user')
 const crypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const auth = require('../MD/auth')
 
 const createdToken = (idUser) => {
     return jwt.sign({ id: idUser }, 'teste123', {expiresIn: '7d'})
 }
 
-router.get( '/', async (require, response) => {
+router.get( '/', auth, async (require, response) => {
 
     try {
         const user = await users.find({});

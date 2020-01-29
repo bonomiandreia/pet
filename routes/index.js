@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../MD/auth')
 
-router.get( '/', (req, res) => {
+router.get( '/', auth, async (req, res) => {
     return res.send({message:'tudo ok com index'})
 })
 
