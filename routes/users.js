@@ -6,17 +6,17 @@ const jwt = require('jsonwebtoken')
 const auth = require('../MD/auth')
 
 const createdToken = (idUser) => {
-    return jwt.sign({ id: idUser }, '*password*', {expiresIn: '7d'})
+    return jwt.sign({ id: idUser }, 'teste123', {expiresIn: '7d'})
 }
 
-router.get( '/', auth, async (require, response) => {
+router.get( '/', auth,async (require, response) => {
 
     try {
         const user = await users.find({});
         return response.send(user);
 
     } catch (error) {
-        return response.send({error: 'error in info'+error})
+        return response.status(400).send({error: 'error in info'+error})
     }
 })
 
@@ -35,7 +35,7 @@ router.post( '/create', async (require, response) => {
         return response.send({create, token: createdToken(create.id)})
 
     } catch (error) {
-        return response.send({ error: 'erro in search user'})
+        return response.status(400).send({ error: 'erro in search user'})
     }
 
 })
@@ -55,7 +55,7 @@ router.post('/auth', async (require, response) => {
         return response.send({auth, token: createdToken(auth.id)})
 
     } catch (error) {
-        return response.send({ error: 'erro in search user'})
+        return response.status(400).send({ error: 'erro in search user'})
     }
 })
 

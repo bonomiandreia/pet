@@ -11,7 +11,7 @@ router.post( '/', auth, async (require, response) => {
         return response.send(post)
 
     } catch {
-        return info.send({error: 'error in info'+error})
+        return info.status(400).send({error: 'error in info'+error})
     }
 })
  
@@ -22,7 +22,7 @@ router.post( '/create', auth, async (require, response) => {
 
     try {
         const postCreate = await posts.create(require.body)
-        return response.send(postCreate)
+        return response.status(201).send(postCreate)
 
     } catch {
         return response.send( {message: 'error in create a post'})
