@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 const bodyparser = require('body-parser')
+var cors = require('cors')
 
 const url = 'mongodb+srv://admin-deia:maria12345@cluster0-pdbvx.mongodb.net/test?retryWrites=true&w=majority'
 const options = {
@@ -25,7 +26,7 @@ mongoose.connection.on('connected', (error) => {
 
 app.use(bodyparser.urlencoded({extended: false}))
 app.use(bodyparser.json());
-
+app.use(cors())
 app.listen(3000);
 
 indexRoute = require('./routes/index');
