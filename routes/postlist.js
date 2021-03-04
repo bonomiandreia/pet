@@ -3,15 +3,14 @@ const router = express.Router();
 const posts = require('../models/post')
 const auth = require('../MD/auth')
 
-router.post( '/', auth, async (require, response) => {
-    const { idUser } = require.body
-
+router.get( '/:id', auth, async (require, response) => {
+    const idUser = require.params.id;
     try {
-        const post = await posts.find({ idUser })
+        const post = await posts.find({idUser})
         return response.send(post)
 
     } catch {
-        return info.status(400).send({error: 'error in info'+error})
+        return response.send( {message: 'error in create a post'})
     }
 })
  
