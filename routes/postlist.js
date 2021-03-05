@@ -10,7 +10,7 @@ router.get( '/:id', auth, async (require, response) => {
         return response.send(post)
 
     } catch {
-        return response.send( {message: 'error in create a post'})
+        return response.status(400).send( {message: 'error search a post'})
     }
 })
  
@@ -24,7 +24,7 @@ router.post( '/create', auth, async (require, response) => {
         return response.status(201).send(postCreate)
 
     } catch {
-        return response.send( {message: 'error in create a post'})
+        return response.status(400).send( {message: 'error in create a post'})
     }
 })
 
