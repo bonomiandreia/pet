@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../MD/auth')
 
 router.get( '/', auth, async (req, res) => {
-    return res.send({message:'tudo ok com index'})
+    return res.send({message:'ok'})
 })
 
 module.exports = router;
