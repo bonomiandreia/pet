@@ -22,7 +22,7 @@ router.get( '/', auth,async (require, response) => {
 
 router.post( '/create', async (require, response) => { 
 
-    const { email, password } = require.body;
+    const { email, password  } = require.body;
 
     if (!email || !password) return response.send({message: 'error information'})
     
