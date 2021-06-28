@@ -28,4 +28,16 @@ router.post( '/create', auth, async (require, response) => {
     }
 })
 
+router.delete( '/delete/:id', auth, async (require, response) => {
+
+    const idPost = require.params.id;
+
+    posts.findByIdAndRemove(idPost).then(() => {
+        response.status(200).send( {message: 'success your post was deleted!'})
+      }).catch((e) => {
+        response.status(400);
+    });
+})
+
+
 module.exports = router;
