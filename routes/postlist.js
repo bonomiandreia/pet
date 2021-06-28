@@ -34,7 +34,7 @@ router.delete( '/delete/:id', auth, async (require, response) => {
 
     posts.findByIdAndRemove(idPost).then(() => {
         response.status(200).send( {message: 'success your post was deleted!'})
-      }).catch((e) => {
+      }).catch(() => {
         response.status(400);
     });
 })
