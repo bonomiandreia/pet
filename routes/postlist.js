@@ -20,8 +20,9 @@ router.post( '/create', auth, async (require, response) => {
     if (!date || !text || !idUser) return response.send({message: 'error information'})
 
     try {
-        const postCreate = await posts.create(require.body)
-        return response.status(201).send(postCreate)
+        await posts.create(require.body)
+        const post = await posts.find({idUser})
+        return response.send(post);
 
     } catch {
         return response.status(400).send( {message: 'error in create a post'})
