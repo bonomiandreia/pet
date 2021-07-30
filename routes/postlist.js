@@ -32,12 +32,18 @@ router.post( '/create', auth, async (require, response) => {
 router.delete( '/delete/:id', auth, async (require, response) => {
 
     const idPost = require.params.id;
+    const { idUser } = require.body;
 
-    posts.findByIdAndRemove(idPost).then(() => {
-        response.status(200).send( {message: 'success your post was deleted!'})
-      }).catch(() => {
+
+    try {
+        await posts.findByIdAndRemove(idPost);
+        const post = await posts.find({idUser});
+        return response.send(post).status( {message: 'success your post was deleted!'})
+
+    } catch {
         response.status(400);
-    });
+    }
+
 })
 
 

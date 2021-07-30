@@ -46,7 +46,7 @@ router.post('/auth', async (require, response) => {
 
     try {
         const auth = await users.findOne( {email}).select('+password');
-        if (!auth) return response.send({ error: 'user doesnt exists'})
+        if (!auth) return response.status(422).send({ error: 'user doesnt exists'})
 
         const passwordOk = await crypt.compare(password, auth.password);
         if (!passwordOk) return response.send({ error: 'password doesnt match'}) 
