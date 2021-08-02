@@ -49,7 +49,7 @@ router.post('/auth', async (require, response) => {
         if (!auth) return response.status(422).send('User doesnt exists')
 
         const passwordOk = await crypt.compare(password, auth.password);
-        if (!passwordOk) return response.status(422).send('Password or email are incorrect') 
+        if (!passwordOk) return response.status(422).send('Password or email are incorrect. ):') 
 
         auth.password = undefined;
         return response.send({auth, token: createdToken(auth.id)})
