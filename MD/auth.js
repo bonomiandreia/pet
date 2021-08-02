@@ -2,10 +2,10 @@ const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
     const token = req.headers.auth;
-    if(!token) return res.status(400).send({ error: 'empty token' });
+    if(!token) return res.status(400).send('empty token' );
 
     jwt.verify(token, 'teste123', (err, decoded) => {
-        if (err) return res.send({ error: 'invalid token' });
+        if (err) return res.send('invalid token');
         return next();
     });
 }
