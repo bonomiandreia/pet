@@ -42,20 +42,20 @@ router.post( '/create', async (require, response) => {
 
 router.post('/auth', async (require, response) => {
     const { email, password } = require.body;
-    if (!email || !password) return response.send({error: 'error information'})
+    if (!email || !password) return response.send('Error information')
 
     try {
         const auth = await users.findOne( {email}).select('+password');
-        if (!auth) return response.status(422).send({ error: 'user doesnt exists'})
+        if (!auth) return response.status(422).send('User doesnt exists')
 
         const passwordOk = await crypt.compare(password, auth.password);
-        if (!passwordOk) return response.status(422).send({ error: 'password doesnt match'}) 
+        if (!passwordOk) return response.status(422).send('Password or email are incorrect') 
 
         auth.password = undefined;
         return response.send({auth, token: createdToken(auth.id)})
 
     } catch (error) {
-        return response.status(400).send({ error: 'erro in search user'})
+        return response.status(400).send({ error: 'Error in search user'})
     }
 })
 
